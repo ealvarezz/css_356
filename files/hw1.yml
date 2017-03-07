@@ -1,0 +1,19 @@
+---
+- hosts: hw1
+  sudo: yes
+  tasks:
+
+      - name: install packages
+        apt: name={{ item }} update_cache=yes state=latest
+        with_items:
+          - apache2
+          - git
+
+      - name: pull hw0 index
+        git: repo=https://github.com/skamal10/hw0.git dest=/var/www/html/hwfolder accept_hostkey=true force=yes
+
+      - name: Move html file
+        command: mv /var/www/html/hwfolder/hw0.html /var/www/html/
+
+      - name: Move img file
+        command: mv /var/www/html/hwfolder/knicks.jpg /var/www/html/
