@@ -33,23 +33,22 @@ router.post('/', function(req, res, next) {
 
 		    keys.forEach(function(severity) {
 			  ch.bindQueue(q.queue, ex, severity);
+			  console.log(severity);
 		    });
 
 		    ch.consume(q.queue, function(msg) {
-			  if(called)
-				return;
-			  else
-				called = true;
+			  if(called){
 			  
-			  message = {"msg": msg.content.toString()};
-			  console.log(" [x] %s: '%s'", msg.fields.routingKey, msg.content.toString());
+				message = {"msg": msg.content.toString()};
+				console.log(" [x] %s: '%s'", msg.fields.routingKey, msg.content.toString());
+				res.send(message); 
+		        }
 		    }, {noAck: true});
 		});
 	  });
     });
 
 
-    res.send(message); 
 
 });
 
