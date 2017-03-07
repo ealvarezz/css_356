@@ -11,6 +11,7 @@ var userObj = require('./model/User');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var listen = require('./routes/listen');
+var speak = require('./routes/speak');
 var eliza_route = require('./routes/eliza_route');
 
 var app = express();
@@ -32,6 +33,7 @@ app.use('/', index);
 app.use('/', eliza_route);
 app.use('/users', users);
 app.use('/listen', listen);
+app.use('/speak', speak);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
